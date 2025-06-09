@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
-interface BlockNumberData {
+interface ScannedBlockData {
   blockNumber: number;
   timestamp: string;
-  lastUpdate?: string;
   containerName?: string;
 }
 
@@ -30,49 +23,71 @@ const TerminalHeader = ({ containerName }: { containerName?: string }) => (
 );
 
 export const BlockNumberDisplay: React.FC = () => {
-  const [data, setData] = useState<BlockNumberData | null>(null);
+  const [scannedBlock, setScannedBlock] = useState<ScannedBlockData | null>(
+    null
+  );
+  const [currentBlock, setCurrentBlock] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<string>("");
 
-  const fetchBlockNumber = async () => {
-    // Keep existing loading state for first load, but not for subsequent fetches
-    if (!data) {
+  const fetchData = async () => {
+    if (!scannedBlock) {
       setLoading(true);
     }
     setError(null);
+
     try {
-      const res = await fetch("/api/block-logs");
-      const json = await res.json();
-      if (json.success && json.latestBlock) {
-        setData({
-          blockNumber: json.latestBlock.blockNumber,
-          timestamp: json.latestBlock.timestamp,
-          containerName: json.containerName || undefined,
+      const [scannedRes, currentRes] = await Promise.all([
+        fetch("/api/block-logs"),
+        fetch("/api/current-block"),
+      ]);
+
+      const scannedJson = await scannedRes.json();
+      const currentJson = await currentRes.json();
+
+      if (scannedJson.success && scannedJson.latestBlock) {
+        setScannedBlock({
+          blockNumber: scannedJson.latestBlock.blockNumber,
+          timestamp: scannedJson.latestBlock.timestamp,
+          containerName: scannedJson.containerName || undefined,
         });
-        setLastUpdated(new Date().toLocaleTimeString());
       } else {
-        setError(json.error || "No block data available");
+        throw new Error(scannedJson.error || "No scanned block data available");
       }
+
+      if (currentJson.success && currentJson.currentBlock) {
+        setCurrentBlock(currentJson.currentBlock);
+      } else {
+        throw new Error(currentJson.error || "No current block data available");
+      }
+
+      setLastUpdated(new Date().toLocaleTimeString());
     } catch (e: any) {
-      setError(e.message || "Failed to fetch block number");
+      setError(e.message || "Failed to fetch block data");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchBlockNumber();
-    const interval = setInterval(fetchBlockNumber, 5000); // Poll more frequently
+    fetchData();
+    const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  const getProgress = () => {
+    if (!currentBlock || !scannedBlock) return 0;
+    if (scannedBlock.blockNumber >= currentBlock) return 100;
+    return (scannedBlock.blockNumber / currentBlock) * 100;
+  };
 
   const TerminalContent = () => {
     if (loading) {
       return (
         <div className="flex items-center gap-2">
           <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-green-400"></div>
-          <span>Loading latest block...</span>
+          <span>Loading block data...</span>
         </div>
       );
     }
@@ -83,24 +98,31 @@ export const BlockNumberDisplay: React.FC = () => {
         </div>
       );
     }
-    if (!data) {
+    if (!scannedBlock) {
       return <div>No block data available.</div>;
     }
 
     return (
-      <div>
-        <p>
-          <span className="text-green-400">❯</span> Latest Block Number:
-          <span className="font-bold ml-2 text-yellow-400">
-            {data.blockNumber}
-          </span>
-        </p>
-        <p>
-          <span className="text-green-400">❯</span> Timestamp:
-          <span className="ml-2">{data.timestamp}</span>
-        </p>
+      <div className="space-y-2">
+        <div className="flex justify-between">
+          <p>
+            <span className="text-green-400">❯</span> Scanned Blocks:
+            <span className="font-bold ml-2 text-yellow-400">
+              {scannedBlock.blockNumber.toLocaleString()}
+            </span>
+          </p>
+          <p>
+            Current Block:
+            <span className="font-bold ml-2 text-yellow-400">
+              {currentBlock.toLocaleString() ?? "..."}
+            </span>
+          </p>
+        </div>
+
+        <Progress value={getProgress()} />
+
         {lastUpdated && (
-          <p className="text-xs text-zinc-500 mt-4">
+          <p className="text-xs text-zinc-500 pt-2">
             Last updated: {lastUpdated}
           </p>
         )}
@@ -110,7 +132,7 @@ export const BlockNumberDisplay: React.FC = () => {
 
   return (
     <Card className="w-full max-w-2xl mx-auto my-8 bg-black border-zinc-700 font-mono text-sm text-zinc-200 shadow-2xl shadow-green-500/10">
-      <TerminalHeader containerName={data?.containerName} />
+      <TerminalHeader containerName={scannedBlock?.containerName} />
       <CardContent className="p-4">
         <TerminalContent />
       </CardContent>

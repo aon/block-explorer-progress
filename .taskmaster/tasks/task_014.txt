@@ -1,0 +1,11 @@
+# Task ID: 14
+# Title: Create API Endpoint to Fetch Current Block Number
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Create a new API endpoint (e.g., `/api/current-block`) that fetches the latest block number from an external Ethereum node or a public API.
+# Details:
+This will likely require an external provider API key (e.g., Infura, Alchemy) stored in an environment variable. The endpoint should return the latest block number in a JSON response. A library like ethers.js or viem should be used.
+
+# Test Strategy:
+

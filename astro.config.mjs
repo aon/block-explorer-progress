@@ -17,6 +17,10 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
+      ETH_RPC_URL: envField.string({
+        context: "server",
+        access: "secret",
+      }),
     },
   },
 

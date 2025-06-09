@@ -1,0 +1,11 @@
+# Task ID: 16
+# Title: Update UI to Fetch Data and Display Progress
+# Status: done
+# Dependencies: 14, 15
+# Priority: medium
+# Description: Modify the `BlockNumberDisplay` component to fetch data from both `/api/block-logs` (scanned block) and the new `/api/current-block` (latest block). Then, use the styled Progress component to display the sync progress.
+# Details:
+The component should store both the scanned and latest block numbers in its state. It should calculate the progress percentage and pass it to the Progress component. Both block numbers should also be displayed clearly as text. Error handling for both fetch calls should be implemented.
+
+# Test Strategy:
+

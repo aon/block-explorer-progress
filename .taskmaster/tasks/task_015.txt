@@ -1,0 +1,11 @@
+# Task ID: 15
+# Title: Add and Style Progress Bar Component
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Add the shadcn/ui Progress component to the project and style it to match the existing terminal-like theme.
+# Details:
+Use `npx shadcn-ui@latest add progress`. Style the progress bar with green or yellow accents to fit the terminal aesthetic. It should have a dark background.
+
+# Test Strategy:
+

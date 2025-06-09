@@ -250,7 +250,7 @@
       "dependencies": [
         10
       ],
-      "status": "pending",
+      "status": "done",
       "subtasks": []
     },
     {
@@ -291,6 +291,56 @@
           "status": "done"
         }
       ]
+    },
+    {
+      "id": 14,
+      "title": "Create API Endpoint to Fetch Current Block Number",
+      "description": "Create a new API endpoint (e.g., `/api/current-block`) that fetches the latest block number from an external Ethereum node or a public API.",
+      "details": "This will likely require an external provider API key (e.g., Infura, Alchemy) stored in an environment variable. The endpoint should return the latest block number in a JSON response. A library like ethers.js or viem should be used.",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 15,
+      "title": "Add and Style Progress Bar Component",
+      "description": "Add the shadcn/ui Progress component to the project and style it to match the existing terminal-like theme.",
+      "details": "Use `npx shadcn-ui@latest add progress`. Style the progress bar with green or yellow accents to fit the terminal aesthetic. It should have a dark background.",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 16,
+      "title": "Update UI to Fetch Data and Display Progress",
+      "description": "Modify the `BlockNumberDisplay` component to fetch data from both `/api/block-logs` (scanned block) and the new `/api/current-block` (latest block). Then, use the styled Progress component to display the sync progress.",
+      "details": "The component should store both the scanned and latest block numbers in its state. It should calculate the progress percentage and pass it to the Progress component. Both block numbers should also be displayed clearly as text. Error handling for both fetch calls should be implemented.",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [
+        14,
+        15
+      ],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 17,
+      "title": "Update Documentation for Progress Bar Feature",
+      "description": "Update the `README.md` to include information about the new progress bar feature and document any new environment variables required (e.g., `ETH_RPC_URL`).",
+      "details": "",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [
+        14,
+        16
+      ],
+      "priority": "medium",
+      "subtasks": []
     }
   ]
 }

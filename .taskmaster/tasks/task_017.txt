@@ -1,0 +1,11 @@
+# Task ID: 17
+# Title: Update Documentation for Progress Bar Feature
+# Status: done
+# Dependencies: 14, 16
+# Priority: medium
+# Description: Update the `README.md` to include information about the new progress bar feature and document any new environment variables required (e.g., `ETH_RPC_URL`).
+# Details:
+
+
+# Test Strategy:
+

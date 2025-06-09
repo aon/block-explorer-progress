@@ -1,47 +1,84 @@
-# Astro Starter Kit: Minimal
+# MSL Block Explorer
+
+A simple, terminal-styled block explorer to monitor the progress of a blockchain node or scanner. This application displays the latest block scanned by a local Docker container and shows its sync progress against the live blockchain's current block number.
+
+![Screenshot](public/screenshot.png)
+
+## 🚀 Features
+
+- **Real-time Block Monitoring**: Fetches the latest scanned block number from a specified Docker container's logs.
+- **Sync Progress**: Compares the scanned block to the current block number from an Ethereum RPC and displays a progress bar.
+- **Terminal UI**: A retro, terminal-inspired interface built with Astro, React, Tailwind CSS, and shadcn/ui.
+- **Dockerized**: Includes a multi-stage `Dockerfile` for easy production deployment.
+
+## 🛠️ Project Structure
+
+- `/public`: Static assets.
+- `/src/components`: React components, including the main `BlockNumberDisplay`.
+- `/src/pages/api`: Server-side API endpoints for fetching block data.
+- `/src/styles`: Global styles and Tailwind configuration.
+- `Dockerfile`: Configuration for building the production Docker image.
+- `astro.config.mjs`: Astro project configuration.
+- `tailwind.config.cjs`: Tailwind CSS theme and plugin configuration.
+
+## ⚙️ Setup & Configuration
+
+### 1. Install Dependencies
+
+This project uses `pnpm` as the package manager.
 
 ```sh
-npm create astro@latest -- --template minimal
+pnpm install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+### 2. Environment Variables
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Create a `.env` file in the root of the project by copying the example file:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+cp env.example .env
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Update the `.env` file with your specific configuration:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `DOCKER_CONTAINER_NAME`: The name of the Docker container whose logs you want to monitor.
+- `ETH_RPC_URL`: The URL for an Ethereum JSON-RPC endpoint (e.g., from Infura, Alchemy, or your own node).
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 💻 Running Locally
 
-## 🧞 Commands
+To start the local development server, run:
 
-All commands are run from the root of the project, from a terminal:
+```sh
+pnpm run dev
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The application will be available at `http://localhost:4321`.
 
-## 👀 Want to learn more?
+## 📦 Docker Deployment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+A multi-stage `Dockerfile` is included for creating an optimized production image.
+
+### 1. Build the Image
+
+From the root of the project, run the following command to build the Docker image:
+
+```sh
+docker build -t msl-block-explorer .
+```
+
+### 2. Run the Container
+
+Once the image is built, you can run it as a container. Make sure to pass the required environment variables.
+
+```sh
+docker run -p 4321:4321 \
+  -e DOCKER_CONTAINER_NAME="your_container_name" \
+  -e ETH_RPC_URL="your_rpc_url" \
+  --name msl-block-explorer-container \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  msl-block-explorer
+```
+
+**Note on Docker Socket:** The command above mounts the Docker socket (`/var/run/docker.sock`) into the container. This is necessary for the application to read logs from other containers. Be aware of the security implications of providing access to the Docker socket.
+
+The application will be accessible at `http://localhost:4321`.
