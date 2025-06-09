@@ -1,0 +1,296 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Initialize Astro Project with React Integration",
+      "description": "Set up the base Astro project with React integration to enable dynamic components with TypeScript support and SSR configuration.",
+      "status": "done",
+      "dependencies": [],
+      "priority": "high",
+      "details": "Project has been successfully initialized using pnpm with React integration and SSR configured. Ready for Docker SDK integration and API endpoint implementation.",
+      "testStrategy": "Verify the project setup by running the development server and ensuring React components with TypeScript support can be rendered. Confirm SSR configuration works with dynamic API endpoints.",
+      "subtasks": [
+        {
+          "id": 1.1,
+          "description": "Create Astro project using `npm create astro@latest` with minimal template",
+          "status": "done"
+        },
+        {
+          "id": 1.2,
+          "description": "Install dependencies using pnpm",
+          "status": "done"
+        },
+        {
+          "id": 1.3,
+          "description": "Add React integration using `npx astro add react --yes`",
+          "status": "done"
+        },
+        {
+          "id": 1.4,
+          "description": "Configure SSR by adding `output: 'server'` to astro.config.mjs",
+          "status": "done"
+        },
+        {
+          "id": 1.5,
+          "description": "Verify project structure includes src/pages directory with index.astro",
+          "status": "done"
+        },
+        {
+          "id": 1.6,
+          "description": "Set up TypeScript configuration for React (jsx: 'react-jsx')",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Configure Docker SDK (dockerode) in Backend",
+      "description": "Set up the Docker SDK (`dockerode`) to interact with the Docker daemon from the backend.",
+      "status": "done",
+      "dependencies": [
+        1
+      ],
+      "priority": "high",
+      "details": "The Docker SDK (`dockerode@4.0.7`) has been successfully configured with a comprehensive Docker client utility. Key features include:\n- Singleton Docker client using Unix socket\n- Environment variable configuration for container name\n- Log parsing for block number extraction\n- Test API endpoint for verification\n\nNext steps involve testing with real containers and production environment setup.",
+      "testStrategy": "1. Verify Docker connection through the test API endpoint\n2. Test container listing and target container detection\n3. Validate log parsing and block number extraction\n4. Test error handling scenarios\n5. Verify production configuration with TLS",
+      "subtasks": [
+        {
+          "id": 2.1,
+          "title": "Install dockerode package",
+          "description": "Install `dockerode` via pnpm with TypeScript types",
+          "status": "done",
+          "details": "Installed dockerode@4.0.7 and @types/dockerode"
+        },
+        {
+          "id": 2.2,
+          "title": "Create Docker client utility",
+          "description": "Implement core Docker functionality",
+          "status": "done",
+          "details": "Created src/lib/docker.ts with connection management, log parsing, and error handling"
+        },
+        {
+          "id": 2.3,
+          "title": "Create test API endpoint",
+          "description": "Implement endpoint for Docker functionality verification",
+          "status": "done",
+          "details": "Created src/pages/api/docker-test.ts for connection testing and container verification"
+        },
+        {
+          "id": 2.4,
+          "title": "Test with development container",
+          "description": "Verify all Docker functionality works with a real container",
+          "status": "done",
+          "details": "Run tests against a development container to validate log parsing, block extraction, and error handling"
+        },
+        {
+          "id": 2.5,
+          "title": "Configure production TLS settings",
+          "description": "Implement secure TCP socket with TLS for production",
+          "status": "done",
+          "details": "Update Docker client configuration to use TCP socket with TLS when in production environment"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Create API Endpoint for Log Fetching",
+      "description": "Implement an API endpoint in Astro to fetch logs from the specified Docker container.",
+      "details": "Create a server-side endpoint in Astro that uses `dockerode` to fetch logs. Use the `since` or `tail` options to limit log retrieval to recent entries. Ensure the endpoint is secure and handles errors gracefully.",
+      "testStrategy": "Test the endpoint by manually calling it and verifying it returns logs from the Docker container.",
+      "priority": "high",
+      "dependencies": [
+        2
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Implement Log Parsing Logic",
+      "description": "Parse the fetched logs to extract the latest `blockNumber` from structured JSON log entries.",
+      "details": "Write a function to parse JSON log entries and filter for those containing `blockNumber`. Handle malformed logs with `try-catch` blocks. Extract the most recent `blockNumber` from valid logs.",
+      "testStrategy": "Test the parsing logic with sample log data, including edge cases like malformed logs.",
+      "priority": "high",
+      "dependencies": [
+        3
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 5,
+      "title": "Build React Component for Block Number Display",
+      "description": "Create a React component to display the latest `blockNumber` fetched from the backend.",
+      "details": "Develop a React component that calls the API endpoint and displays the `blockNumber` prominently. Include a timestamp for the last update and the container name being monitored.",
+      "testStrategy": "Verify the component renders correctly and updates dynamically when new data is fetched.",
+      "priority": "medium",
+      "dependencies": [
+        1,
+        4
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Implement Frontend Polling Mechanism",
+      "description": "Add auto-refreshing logic to the frontend to poll the API endpoint every 30 seconds.",
+      "status": "done",
+      "dependencies": [
+        5
+      ],
+      "priority": "medium",
+      "details": "1. Identify the React component responsible for displaying the block number (created in Task 5).\n2. Add polling logic using `setInterval` or a library like `SWR`/`React Query` with a `refreshInterval` of 30 seconds to poll the API endpoint.\n3. Ensure the polling stops when the component unmounts to prevent memory leaks.",
+      "testStrategy": "Test the polling by observing the UI updates every 30 seconds and verifying no memory leaks occur.",
+      "subtasks": [
+        {
+          "id": 6.1,
+          "title": "Locate block number component",
+          "description": "Explore the codebase to identify the React component responsible for displaying the block number",
+          "status": "done"
+        },
+        {
+          "id": 6.2,
+          "title": "Implement polling logic",
+          "description": "Add polling mechanism using setInterval or SWR/React Query with 30-second interval",
+          "status": "done"
+        },
+        {
+          "id": 6.3,
+          "title": "Add cleanup on unmount",
+          "description": "Ensure polling stops when component unmounts to prevent memory leaks",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Basic UI Styling",
+      "description": "Apply minimal styling to the UI to ensure clarity and focus on the `blockNumber`.",
+      "details": "Use a CSS framework like Tailwind CSS or plain CSS to style the React component. Ensure the `blockNumber` is prominent and the layout is clean.",
+      "testStrategy": "Review the UI for visual consistency and readability.",
+      "priority": "low",
+      "dependencies": [
+        5
+      ],
+      "status": "done",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Install Tailwind CSS, shadcn/ui, and Geist font",
+          "description": "Set up Tailwind CSS and shadcn/ui in the project. Install Geist font for typography. Prepare the project for console-like/terminal-like styling.",
+          "details": "- Install Tailwind CSS and configure it for the Astro + React project.\n- Add shadcn/ui for component styling.\n- Add Geist font (via npm or CDN) and configure it as the default font.\n- Ensure the setup supports a console-like/terminal-like UI aesthetic.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 7
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Environment Variable Configuration",
+      "description": "Set up environment variables for the Docker container name and other configurations.",
+      "details": "Define the `DOCKER_CONTAINER_NAME` environment variable and ensure it is read by the backend. Use `dotenv` for local development.",
+      "testStrategy": "Verify the environment variables are correctly loaded and used by the application.",
+      "priority": "medium",
+      "dependencies": [
+        1
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 9,
+      "title": "Error Handling for Docker Operations",
+      "description": "Implement robust error handling for Docker log fetching and parsing.",
+      "details": "Add error handling for cases where the container is not running or logs cannot be fetched. Display user-friendly error messages in the UI.",
+      "testStrategy": "Simulate errors (e.g., stopping the container) and verify the application handles them gracefully.",
+      "priority": "medium",
+      "dependencies": [
+        3,
+        4
+      ],
+      "status": "deferred",
+      "subtasks": []
+    },
+    {
+      "id": 10,
+      "title": "Deployment Setup",
+      "description": "Create a Dockerfile to containerize the Astro application for production deployment.",
+      "status": "done",
+      "dependencies": [
+        1,
+        8
+      ],
+      "priority": "low",
+      "details": "Configure a production-ready Dockerfile for the Astro application, including proper multi-stage builds, optimized dependencies, and secure base images.",
+      "testStrategy": "Build the Docker image locally and verify the Astro application runs correctly in the container.",
+      "subtasks": []
+    },
+    {
+      "id": 11,
+      "title": "Add Timestamp to UI",
+      "description": "Display the last update time alongside the `blockNumber` for better context.",
+      "details": "Modify the React component to include a timestamp indicating when the `blockNumber` was last updated.",
+      "testStrategy": "Verify the timestamp updates correctly with each poll.",
+      "priority": "low",
+      "dependencies": [
+        5
+      ],
+      "status": "done",
+      "subtasks": []
+    },
+    {
+      "id": 12,
+      "title": "Documentation and Readme",
+      "description": "Write comprehensive documentation for setup, usage, and development.",
+      "details": "Create a `README.md` file with instructions for setting up the project, configuring environment variables, and deploying. Include API documentation if applicable.",
+      "testStrategy": "Review the documentation for accuracy and completeness.",
+      "priority": "low",
+      "dependencies": [
+        10
+      ],
+      "status": "pending",
+      "subtasks": []
+    },
+    {
+      "id": 13,
+      "title": "Fix log parsing in docker.ts for timestamped JSON logs",
+      "description": "Update the log parsing logic in `docker.ts` to correctly handle log lines prefixed with a timestamp and a space, ensuring accurate extraction of JSON objects.",
+      "status": "done",
+      "dependencies": [
+        4
+      ],
+      "priority": "high",
+      "details": "The current log parsing in `docker.ts` incorrectly assumes logs are pure JSON. Modify the `parseBlockNumbers` method to first identify and remove the timestamp prefix (using regex like /^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z /) before attempting to parse the remaining string as JSON. Split each line at the first space after the timestamp to extract the JSON part. Ensure robust error handling for malformed lines (missing JSON, invalid JSON after timestamp).",
+      "testStrategy": "1. Prepare a Docker container that outputs logs with the specified timestamp prefix and JSON content. 2. Run the application and fetch logs through the implemented API endpoint. 3. Verify that `blockNumber` and other JSON fields are correctly parsed and extracted from the logs. 4. Test with logs containing valid JSON and logs with malformed JSON after the timestamp to ensure error handling is effective. 5. Update or add unit tests for the parseBlockNumbers method.",
+      "subtasks": [
+        {
+          "id": 13.1,
+          "description": "Locate and analyze the parseBlockNumbers method in docker.ts",
+          "status": "done"
+        },
+        {
+          "id": 13.2,
+          "description": "Implement timestamp detection and removal using regex pattern",
+          "status": "done"
+        },
+        {
+          "id": 13.3,
+          "description": "Modify parsing logic to extract and process JSON substring after timestamp",
+          "status": "done"
+        },
+        {
+          "id": 13.4,
+          "description": "Add robust error handling for malformed log lines",
+          "status": "done"
+        },
+        {
+          "id": 13.5,
+          "description": "Update/add unit tests for parseBlockNumbers method",
+          "status": "done"
+        }
+      ]
+    }
+  ]
+}

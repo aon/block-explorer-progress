@@ -1,0 +1,33 @@
+# Task ID: 6
+# Title: Implement Frontend Polling Mechanism
+# Status: done
+# Dependencies: 5
+# Priority: medium
+# Description: Add auto-refreshing logic to the frontend to poll the API endpoint every 30 seconds.
+# Details:
+1. Identify the React component responsible for displaying the block number (created in Task 5).
+2. Add polling logic using `setInterval` or a library like `SWR`/`React Query` with a `refreshInterval` of 30 seconds to poll the API endpoint.
+3. Ensure the polling stops when the component unmounts to prevent memory leaks.
+
+# Test Strategy:
+Test the polling by observing the UI updates every 30 seconds and verifying no memory leaks occur.
+
+# Subtasks:
+## 6.1. Locate block number component [done]
+### Dependencies: None
+### Description: Explore the codebase to identify the React component responsible for displaying the block number
+### Details:
+
+
+## 6.2. Implement polling logic [done]
+### Dependencies: None
+### Description: Add polling mechanism using setInterval or SWR/React Query with 30-second interval
+### Details:
+
+
+## 6.3. Add cleanup on unmount [done]
+### Dependencies: None
+### Description: Ensure polling stops when component unmounts to prevent memory leaks
+### Details:
+
+

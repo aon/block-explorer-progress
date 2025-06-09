@@ -1,0 +1,11 @@
+# Task ID: 4
+# Title: Implement Log Parsing Logic
+# Status: done
+# Dependencies: 3
+# Priority: high
+# Description: Parse the fetched logs to extract the latest `blockNumber` from structured JSON log entries.
+# Details:
+Write a function to parse JSON log entries and filter for those containing `blockNumber`. Handle malformed logs with `try-catch` blocks. Extract the most recent `blockNumber` from valid logs.
+
+# Test Strategy:
+Test the parsing logic with sample log data, including edge cases like malformed logs.

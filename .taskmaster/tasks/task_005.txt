@@ -1,0 +1,11 @@
+# Task ID: 5
+# Title: Build React Component for Block Number Display
+# Status: done
+# Dependencies: 1, 4
+# Priority: medium
+# Description: Create a React component to display the latest `blockNumber` fetched from the backend.
+# Details:
+Develop a React component that calls the API endpoint and displays the `blockNumber` prominently. Include a timestamp for the last update and the container name being monitored.
+
+# Test Strategy:
+Verify the component renders correctly and updates dynamically when new data is fetched.

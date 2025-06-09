@@ -1,0 +1,22 @@
+# Task ID: 7
+# Title: Basic UI Styling
+# Status: done
+# Dependencies: 5
+# Priority: low
+# Description: Apply minimal styling to the UI to ensure clarity and focus on the `blockNumber`.
+# Details:
+Use a CSS framework like Tailwind CSS or plain CSS to style the React component. Ensure the `blockNumber` is prominent and the layout is clean.
+
+# Test Strategy:
+Review the UI for visual consistency and readability.
+
+# Subtasks:
+## 1. Install Tailwind CSS, shadcn/ui, and Geist font [done]
+### Dependencies: None
+### Description: Set up Tailwind CSS and shadcn/ui in the project. Install Geist font for typography. Prepare the project for console-like/terminal-like styling.
+### Details:
+- Install Tailwind CSS and configure it for the Astro + React project.
+- Add shadcn/ui for component styling.
+- Add Geist font (via npm or CDN) and configure it as the default font.
+- Ensure the setup supports a console-like/terminal-like UI aesthetic.
+

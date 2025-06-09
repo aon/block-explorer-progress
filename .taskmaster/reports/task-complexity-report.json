@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "generatedAt": "2025-06-09T14:08:49.168Z",
+    "tasksAnalyzed": 12,
+    "totalTasks": 12,
+    "analysisCount": 12,
+    "thresholdScore": 5,
+    "projectName": "Taskmaster",
+    "usedResearch": false
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 1,
+      "taskTitle": "Initialize Astro Project with React Integration",
+      "complexityScore": 4,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the task into subtasks: 1) Initialize the Astro project, 2) Add React integration, 3) Configure SSR for dynamic API endpoints.",
+      "reasoning": "The task involves multiple steps (initialization, integration, configuration), but each step is straightforward with clear documentation."
+    },
+    {
+      "taskId": 2,
+      "taskTitle": "Configure Docker SDK (dockerode) in Backend",
+      "complexityScore": 6,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the task into subtasks: 1) Install `dockerode`, 2) Configure Docker connection, 3) Set up TLS for production.",
+      "reasoning": "The task requires handling environment variables and secure communication, adding moderate complexity."
+    },
+    {
+      "taskId": 3,
+      "taskTitle": "Create API Endpoint for Log Fetching",
+      "complexityScore": 5,
+      "recommendedSubtasks": 2,
+      "expansionPrompt": "Break down the task into subtasks: 1) Create the server-side endpoint, 2) Implement log retrieval with `since`/`tail` options.",
+      "reasoning": "The task involves API creation and log handling, but the scope is limited to a single endpoint."
+    },
+    {
+      "taskId": 4,
+      "taskTitle": "Implement Log Parsing Logic",
+      "complexityScore": 7,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the task into subtasks: 1) Parse JSON logs, 2) Filter for `blockNumber`, 3) Handle malformed logs.",
+      "reasoning": "Parsing and error handling add complexity, especially with edge cases like malformed logs."
+    },
+    {
+      "taskId": 5,
+      "taskTitle": "Build React Component for Block Number Display",
+      "complexityScore": 5,
+      "recommendedSubtasks": 2,
+      "expansionPrompt": "Break down the task into subtasks: 1) Create the component, 2) Fetch and display `blockNumber` with timestamp.",
+      "reasoning": "The task is straightforward but involves API integration and dynamic rendering."
+    },
+    {
+      "taskId": 6,
+      "taskTitle": "Implement Frontend Polling Mechanism",
+      "complexityScore": 4,
+      "recommendedSubtasks": 2,
+      "expansionPrompt": "Break down the task into subtasks: 1) Set up polling logic, 2) Handle unmounting cleanup.",
+      "reasoning": "Polling is a common pattern, but cleanup adds minor complexity."
+    },
+    {
+      "taskId": 7,
+      "taskTitle": "Basic UI Styling",
+      "complexityScore": 3,
+      "recommendedSubtasks": 1,
+      "expansionPrompt": "Break down the task into subtasks: 1) Apply styling to the React component.",
+      "reasoning": "Styling is low-complexity, especially with frameworks like Tailwind."
+    },
+    {
+      "taskId": 8,
+      "taskTitle": "Environment Variable Configuration",
+      "complexityScore": 3,
+      "recommendedSubtasks": 2,
+      "expansionPrompt": "Break down the task into subtasks: 1) Define variables, 2) Set up `dotenv` for local development.",
+      "reasoning": "Environment setup is straightforward but requires validation."
+    },
+    {
+      "taskId": 9,
+      "taskTitle": "Error Handling for Docker Operations",
+      "complexityScore": 6,
+      "recommendedSubtasks": 2,
+      "expansionPrompt": "Break down the task into subtasks: 1) Handle container/log errors, 2) Display user-friendly messages.",
+      "reasoning": "Error handling adds complexity, especially for edge cases."
+    },
+    {
+      "taskId": 10,
+      "taskTitle": "Deployment Setup",
+      "complexityScore": 5,
+      "recommendedSubtasks": 3,
+      "expansionPrompt": "Break down the task into subtasks: 1) Configure for Vercel/Netlify, 2) Secure Docker in production, 3) Test staging deployment.",
+      "reasoning": "Deployment involves multiple steps but is manageable with clear targets."
+    },
+    {
+      "taskId": 11,
+      "taskTitle": "Add Timestamp to UI",
+      "complexityScore": 2,
+      "recommendedSubtasks": 1,
+      "expansionPrompt": "Break down the task into subtasks: 1) Modify the component to include a timestamp.",
+      "reasoning": "This is a simple UI enhancement with minimal complexity."
+    },
+    {
+      "taskId": 12,
+      "taskTitle": "Documentation and Readme",
+      "complexityScore": 3,
+      "recommendedSubtasks": 2,
+      "expansionPrompt": "Break down the task into subtasks: 1) Write setup/usage instructions, 2) Include API documentation.",
+      "reasoning": "Documentation is straightforward but requires attention to detail."
+    }
+  ]
+}

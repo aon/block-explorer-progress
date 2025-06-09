@@ -1,0 +1,11 @@
+# Task ID: 11
+# Title: Add Timestamp to UI
+# Status: done
+# Dependencies: 5
+# Priority: low
+# Description: Display the last update time alongside the `blockNumber` for better context.
+# Details:
+Modify the React component to include a timestamp indicating when the `blockNumber` was last updated.
+
+# Test Strategy:
+Verify the timestamp updates correctly with each poll.

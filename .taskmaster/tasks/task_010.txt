@@ -1,0 +1,11 @@
+# Task ID: 10
+# Title: Deployment Setup
+# Status: done
+# Dependencies: 1, 8
+# Priority: low
+# Description: Create a Dockerfile to containerize the Astro application for production deployment.
+# Details:
+Configure a production-ready Dockerfile for the Astro application, including proper multi-stage builds, optimized dependencies, and secure base images.
+
+# Test Strategy:
+Build the Docker image locally and verify the Astro application runs correctly in the container.

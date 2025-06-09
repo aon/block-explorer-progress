@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BlockNumberDisplay } from "../components/BlockNumberDisplay";
+---
+
+<Layout title="MSL Block Explorer">
+	<main>
+		<BlockNumberDisplay client:load />
+	</main>
+</Layout>

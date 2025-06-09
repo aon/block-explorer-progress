@@ -1,0 +1,53 @@
+# Task ID: 2
+# Title: Configure Docker SDK (dockerode) in Backend
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Set up the Docker SDK (`dockerode`) to interact with the Docker daemon from the backend.
+# Details:
+The Docker SDK (`dockerode@4.0.7`) has been successfully configured with a comprehensive Docker client utility. Key features include:
+- Singleton Docker client using Unix socket
+- Environment variable configuration for container name
+- Log parsing for block number extraction
+- Test API endpoint for verification
+
+Next steps involve testing with real containers and production environment setup.
+
+# Test Strategy:
+1. Verify Docker connection through the test API endpoint
+2. Test container listing and target container detection
+3. Validate log parsing and block number extraction
+4. Test error handling scenarios
+5. Verify production configuration with TLS
+
+# Subtasks:
+## 2.1. Install dockerode package [done]
+### Dependencies: None
+### Description: Install `dockerode` via pnpm with TypeScript types
+### Details:
+Installed dockerode@4.0.7 and @types/dockerode
+
+## 2.2. Create Docker client utility [done]
+### Dependencies: None
+### Description: Implement core Docker functionality
+### Details:
+Created src/lib/docker.ts with connection management, log parsing, and error handling
+
+## 2.3. Create test API endpoint [done]
+### Dependencies: None
+### Description: Implement endpoint for Docker functionality verification
+### Details:
+Created src/pages/api/docker-test.ts for connection testing and container verification
+
+## 2.4. Test with development container [done]
+### Dependencies: None
+### Description: Verify all Docker functionality works with a real container
+### Details:
+Run tests against a development container to validate log parsing, block extraction, and error handling
+
+## 2.5. Configure production TLS settings [done]
+### Dependencies: None
+### Description: Implement secure TCP socket with TLS for production
+### Details:
+Update Docker client configuration to use TCP socket with TLS when in production environment
+

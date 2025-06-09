@@ -1,0 +1,11 @@
+# Task ID: 8
+# Title: Environment Variable Configuration
+# Status: done
+# Dependencies: 1
+# Priority: medium
+# Description: Set up environment variables for the Docker container name and other configurations.
+# Details:
+Define the `DOCKER_CONTAINER_NAME` environment variable and ensure it is read by the backend. Use `dotenv` for local development.
+
+# Test Strategy:
+Verify the environment variables are correctly loaded and used by the application.

@@ -1,0 +1,43 @@
+# Task ID: 13
+# Title: Fix log parsing in docker.ts for timestamped JSON logs
+# Status: done
+# Dependencies: 4
+# Priority: high
+# Description: Update the log parsing logic in `docker.ts` to correctly handle log lines prefixed with a timestamp and a space, ensuring accurate extraction of JSON objects.
+# Details:
+The current log parsing in `docker.ts` incorrectly assumes logs are pure JSON. Modify the `parseBlockNumbers` method to first identify and remove the timestamp prefix (using regex like /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z /) before attempting to parse the remaining string as JSON. Split each line at the first space after the timestamp to extract the JSON part. Ensure robust error handling for malformed lines (missing JSON, invalid JSON after timestamp).
+
+# Test Strategy:
+1. Prepare a Docker container that outputs logs with the specified timestamp prefix and JSON content. 2. Run the application and fetch logs through the implemented API endpoint. 3. Verify that `blockNumber` and other JSON fields are correctly parsed and extracted from the logs. 4. Test with logs containing valid JSON and logs with malformed JSON after the timestamp to ensure error handling is effective. 5. Update or add unit tests for the parseBlockNumbers method.
+
+# Subtasks:
+## 13.1. undefined [done]
+### Dependencies: None
+### Description: Locate and analyze the parseBlockNumbers method in docker.ts
+### Details:
+
+
+## 13.2. undefined [done]
+### Dependencies: None
+### Description: Implement timestamp detection and removal using regex pattern
+### Details:
+
+
+## 13.3. undefined [done]
+### Dependencies: None
+### Description: Modify parsing logic to extract and process JSON substring after timestamp
+### Details:
+
+
+## 13.4. undefined [done]
+### Dependencies: None
+### Description: Add robust error handling for malformed log lines
+### Details:
+
+
+## 13.5. undefined [done]
+### Dependencies: None
+### Description: Update/add unit tests for parseBlockNumbers method
+### Details:
+
+

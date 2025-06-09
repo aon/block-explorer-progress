@@ -1,0 +1,11 @@
+# Task ID: 3
+# Title: Create API Endpoint for Log Fetching
+# Status: done
+# Dependencies: 2
+# Priority: high
+# Description: Implement an API endpoint in Astro to fetch logs from the specified Docker container.
+# Details:
+Create a server-side endpoint in Astro that uses `dockerode` to fetch logs. Use the `since` or `tail` options to limit log retrieval to recent entries. Ensure the endpoint is secure and handles errors gracefully.
+
+# Test Strategy:
+Test the endpoint by manually calling it and verifying it returns logs from the Docker container.
