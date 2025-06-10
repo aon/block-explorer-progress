@@ -79,6 +79,38 @@ docker run -p 4321:4321 \
   msl-block-explorer
 ```
 
+### 3. Using the Start Script (Recommended)
+
+An executable script is provided at `scripts/start.sh` to simplify the build and run process. This script will automatically:
+
+1.  Build the Docker image.
+2.  Stop and remove any existing container with the same name.
+3.  Start a new container.
+
+To use it, simply run:
+
+```sh
+./scripts/start.sh
+```
+
+By default, the application will be exposed on port `3000`. You can specify a different host port by passing it as an argument:
+
+```sh
+./scripts/start.sh 8080
+```
+
+This will map port `8080` on your host to port `3000` in the container.
+
+### 4. Stopping the Container
+
+To stop and remove the container, you can use the provided script:
+
+```sh
+./scripts/stop.sh
+```
+
+This script will find the container by name, stop it if it's running, and then permanently remove it.
+
 **Note on Docker Socket:** The command above mounts the Docker socket (`/var/run/docker.sock`) into the container. This is necessary for the application to read logs from other containers. Be aware of the security implications of providing access to the Docker socket.
 
 The application will be accessible at `http://localhost:4321`.
