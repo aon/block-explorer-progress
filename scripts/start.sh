@@ -18,8 +18,14 @@ if [ "$(docker ps -a -q -f name="^${CONTAINER_NAME}$")" ]; then
     docker rm "$CONTAINER_NAME" > /dev/null
 fi
 
+ENV_FILE_ARGS=""
+if [ -f ".env" ]; then
+    echo "Found .env file. Passing it to the container..."
+    ENV_FILE_ARGS="--env-file .env"
+fi
+
 echo "Starting new container: $CONTAINER_NAME on port $HOST_PORT..."
-docker run -d --name "$CONTAINER_NAME" -p "$PORT_MAPPING" "$IMAGE_NAME"
+docker run -d --name "$CONTAINER_NAME" -p "$PORT_MAPPING" $ENV_FILE_ARGS "$IMAGE_NAME"
 
 echo ""
 echo "✅ Docker container started successfully!"
