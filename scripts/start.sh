@@ -25,7 +25,7 @@ if [ -f ".env" ]; then
 fi
 
 echo "Starting new container: $CONTAINER_NAME on port $HOST_PORT..."
-docker run -d --name "$CONTAINER_NAME" -p "$PORT_MAPPING" $ENV_FILE_ARGS "$IMAGE_NAME"
+docker run -d --name "$CONTAINER_NAME" -p "$PORT_MAPPING" -v /var/run/docker.sock:/var/run/docker.sock $ENV_FILE_ARGS "$IMAGE_NAME"
 
 echo ""
 echo "✅ Docker container started successfully!"
