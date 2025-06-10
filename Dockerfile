@@ -27,5 +27,5 @@ ENV DOCKER_CONTAINER_NAME=default_container
 COPY --from=builder /app/ .
 RUN npm install -g pnpm && pnpm install --prod --no-optional
 
-EXPOSE 4321
-CMD ["node", "./dist/server/entry.mjs"]
+EXPOSE 3000
+CMD ["pnpm", "start"]
